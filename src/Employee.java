@@ -19,9 +19,6 @@ public abstract class Employee {
     public String toString() {
         return "\tPESEL : " + pesel +
                 "\n\tName : " + name +
-                "\n\tSecond name : " + secondName +
-                "\n\tPosition : Director" +
-                "\n\tPayment (zł) : " + payment +
-                "\n\tWork number : " + number;
+                "\n\tSecond name : " + secondName;
     }
 }

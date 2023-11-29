@@ -16,7 +16,11 @@ public class Director extends Employee {
 
     @Override
     public String toString() {
-        return super.toString() + "\n\tDutyAllowance (zł) : " + dutyAllowance +
+        return super.toString() +
+                "\n\tPosition : Director" +
+                "\n\tPayment (zł) : " + payment +
+                "\n\tWork number : " + number +
+                "\n\tDutyAllowance (zł) : " + dutyAllowance +
                 "\n\tCard number : " + cardNumber +
                 "\n\tCommission Limit (zł) : " + costLimit + "\n";
     }

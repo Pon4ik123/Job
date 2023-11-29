@@ -13,8 +13,12 @@ public class Seller extends Employee {
 
     @Override
     public String toString() {
-        return super.toString() + "\n\tCommission Rate (%) : " + commissionRate +
-                                  "\n\tCommission Limit (zł) : " + commissionLimit + "\n";
+        return super.toString() +
+                "\n\tPosition : Seller" +
+                "\n\tPayment (zł) : " + payment +
+                "\n\tWork number : " + number +
+                "\n\tCommission Rate (%) : " + commissionRate +
+                "\n\tCommission Limit (zł) : " + commissionLimit + "\n";
 
     }
 }
