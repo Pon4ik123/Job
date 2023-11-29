@@ -1,16 +1,17 @@
-import javax.swing.plaf.SliderUI;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Long, Object> obj= new HashMap<Long, Object>();
+        Map<Long, Object> obj = new HashMap<Long, Object>();
         Director director = new Director();
         Seller seller = new Seller();
         char pos;
 
         Scanner rm = new Scanner(System.in);
         short choice;
-        do{
+        do {
             System.out.println("MENU");
             System.out.println("\t1. List of employees");
             System.out.println("\t2. Add employee");
@@ -20,9 +21,9 @@ public class Main {
             System.out.print("Make your choice: ");
             choice = rm.nextShort();
 
-            switch (choice){
+            switch (choice) {
                 case 1:
-                    for (Map.Entry<Long, Object> me: obj.entrySet()) {
+                    for (Map.Entry<Long, Object> me : obj.entrySet()) {
                         System.out.println();
                     }
                     break;
@@ -31,15 +32,13 @@ public class Main {
                     System.out.print("\t[D]irector/[S]eller:\t");
                     pos = rm.next().toUpperCase().charAt(0);
                     System.out.println("\t-------------------------------------------");
-                    if (pos == 'D'){
+                    if (pos == 'D') {
                         director.creatDirector();
                         obj.put(director.pesel, director);
-                    }
-                    else if (pos == 'S'){
+                    } else if (pos == 'S') {
                         seller.creatSeller();
                         obj.put(seller.pesel, seller);
-                    }
-                    else{
+                    } else {
                         System.out.println("Incorrect choice, try again");
                     }
                     System.out.println("\t-------------------------------------------");
@@ -51,6 +50,6 @@ public class Main {
                 case 5:
                     break;
             }
-        } while(choice != 5);
+        } while (choice != 5);
     }
 }

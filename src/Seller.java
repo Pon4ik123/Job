@@ -4,7 +4,7 @@ public class Seller extends Employee {
     int commissionLimit;
     short commissionRate;
 
-    void creatSeller(){
+    void creatSeller() {
         Scanner rm = new Scanner(System.in);
 
         Seller seller = new Seller();

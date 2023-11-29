@@ -1,11 +1,10 @@
-import java.util.Map;
 import java.util.Scanner;
 
 public class Director extends Employee {
     int dutyAllowance;
     int costLimit;
 
-    void creatDirector(){
+    void creatDirector() {
         Scanner rm = new Scanner(System.in);
 
         Director director = new Director();
