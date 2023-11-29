@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Long, Object> employees = new HashMap<>();
+        Map<Long, Employee> employees = new HashMap<>();
         Scanner rm = new Scanner(System.in);
         int choice;
 
@@ -35,17 +35,20 @@ public class Main {
         } while (choice != 5);
     }
 
-    public static void show(Map<Long, Object> employees) {
+    public static void show(Map<Long, Employee> employees) {
         System.out.println("1. List of employees:");
-        for (Map.Entry<Long, Object> entry : employees.entrySet()) {
-            System.out.println(entry.getValue());
+//        for (Map.Entry<Long, Employee> entry : employees.entrySet()) {
+//            System.out.println(entry.getValue());
+//        }
+        for (Employee employee : employees.values()) {
+            System.out.println(employee);
         }
     }
 
-    public static void add(Map<Long, Object> employees, Scanner rm) {
+    public static void add(Map<Long, Employee> employees, Scanner rm) {
         System.out.println("2. Add employee");
         System.out.print("[D]irector/[S]eller: ");
-        char employeeType = rm.next().charAt(0);
+        String employeeType = rm.next().substring(0, 1).toUpperCase();
 
         System.out.println("------------------------------------------------------------------");
         System.out.print("\tPESEL:\t");
@@ -59,7 +62,7 @@ public class Main {
         System.out.print("\tWork number:\t");
         int number = rm.nextInt();
 
-        if (employeeType == 'D' || employeeType == 'd') {
+        if (employeeType.equals("D")) {
             System.out.print("\tCard number:\t");
             int cardNumber = rm.nextInt();
             System.out.print("\tDutyAllowance (zł) :\t");
@@ -67,16 +70,16 @@ public class Main {
             System.out.print("\tCommission Limit:\t ");
             int costLimit = rm.nextInt();
 
-            Director director = new Director(pesel, name, secondName, 'D', payment, number, cardNumber, dutyAllowance, costLimit);
+            Director director = new Director(pesel, name, secondName, payment, number, cardNumber, dutyAllowance, costLimit);
             employees.put(pesel, director);
 
-        } else if (employeeType == 'S' || employeeType == 's') {
+        } else if (employeeType.equals("S")) {
             System.out.print("\tCommission Limit (zł) :\t");
             int commissionLimit = rm.nextInt();
             System.out.print("\tCommission Rate (%) :\t");
             short commissionRate = rm.nextShort();
 
-            Seller seller = new Seller(pesel, name, secondName, 'H', payment, number, commissionLimit, commissionRate);
+            Seller seller = new Seller(pesel, name, secondName, payment, number, commissionLimit, commissionRate);
             employees.put(pesel, seller);
         } else {
             System.out.println("Wrong choice.");
@@ -85,7 +88,7 @@ public class Main {
         System.out.println("------------------------------------------------------------------");
     }
 
-    public static void remove(Map<Long, Object> employees, Scanner rm) {
+    public static void remove(Map<Long, Employee> employees, Scanner rm) {
         System.out.print("Write employee's PESEL to delete: ");
         Long peselToRemove = rm.nextLong();
         if (employees.containsKey(peselToRemove)) {
