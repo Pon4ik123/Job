@@ -6,7 +6,7 @@ public class Seller extends Employee {
     short commissionRate;
 
     public Seller(Long pesel, String name, String secondName, int payment, int number, int commissionLimit, short commissionRate) {
-        super(pesel, name, secondName, payment, number);
+        super(pesel, name, secondName, payment, number, "Seller");
         this.commissionLimit = commissionLimit;
         this.commissionRate = commissionRate;
     }
@@ -14,9 +14,6 @@ public class Seller extends Employee {
     @Override
     public String toString() {
         return super.toString() +
-                "\n\tPosition : Seller" +
-                "\n\tPayment (zł) : " + payment +
-                "\n\tWork number : " + number +
                 "\n\tCommission Rate (%) : " + commissionRate +
                 "\n\tCommission Limit (zł) : " + commissionLimit + "\n";
 

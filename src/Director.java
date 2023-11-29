@@ -8,7 +8,7 @@ public class Director extends Employee {
     int cardNumber;
 
     public Director(Long pesel, String name, String secondName, int payment, int number, int cardNumber, int dutyAllowance, int costLimit) {
-        super(pesel, name, secondName, payment, number);
+        super(pesel, name, secondName, payment, number, "Director");
         this.dutyAllowance = dutyAllowance;
         this.costLimit = costLimit;
         this.cardNumber = cardNumber;
@@ -17,10 +17,7 @@ public class Director extends Employee {
     @Override
     public String toString() {
         return super.toString() +
-                "\n\tPosition : Director" +
-                "\n\tPayment (zł) : " + payment +
-                "\n\tWork number : " + number +
-                "\n\tDutyAllowance (zł) : " + dutyAllowance +
+                "\n\tDuty Allowance (zł) : " + dutyAllowance +
                 "\n\tCard number : " + cardNumber +
                 "\n\tCommission Limit (zł) : " + costLimit + "\n";
     }
