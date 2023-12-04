@@ -1,6 +1,3 @@
-import java.util.Map;
-import java.util.Scanner;
-
 public class Seller extends Employee {
     int commissionLimit;
     short commissionRate;

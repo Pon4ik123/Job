@@ -1,8 +1,12 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipInputStream;
 
-public class Controller {
+public class Controller implements Serializable{
     public static void show(Map<Long, Employee> employees) {
         if(employees.isEmpty()){
             return;
@@ -75,6 +79,66 @@ public class Controller {
             System.out.println("Employee with PESEL " + peselToRemove + " is deleted.");
         } else {
             System.out.println("Unidentified PESEL.");
+        }
+    }
+
+    public static void writeEmployeesToZip(Map<Long, Employee> employees, String fileName) {
+        if (employees.isEmpty()) {
+            System.out.println("No employees to write to the zip file.");
+            return;
+        }
+
+        try (FileOutputStream fos = new FileOutputStream(fileName);
+             ZipOutputStream zos = new ZipOutputStream(fos)) {
+
+            for (Map.Entry<Long, Employee> entry : employees.entrySet()) {
+                Long pesel = entry.getKey();
+                Employee employee = entry.getValue();
+
+                // Create a new entry in the zip file for each employee
+                ZipEntry entryInZip = new ZipEntry(pesel + ".txt");
+                zos.putNextEntry(entryInZip);
+
+                // Convert employee details to bytes and write to the zip file
+                byte[] employeeBytes = employee.toString().getBytes();
+                zos.write(employeeBytes, 0, employeeBytes.length);
+
+                // Close the entry
+                zos.closeEntry();
+            }
+
+            System.out.println("Employees written to the zip file: " + fileName);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readEmployeesFromZip(String fileName) {
+        try (FileInputStream fis = new FileInputStream(fileName);
+             ZipInputStream zis = new ZipInputStream(fis)) {
+
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
+                System.out.println("Employee details from " + entry.getName() + ":");
+
+                // Read employee details from the zip file
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = zis.read(buffer)) != -1) {
+                    baos.write(buffer, 0, bytesRead);
+                }
+
+                // Display employee details in the terminal
+                System.out.println(baos.toString());
+
+                // Close the entry
+                zis.closeEntry();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

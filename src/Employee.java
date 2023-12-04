@@ -1,5 +1,3 @@
-import java.util.Map;
-
 public abstract class Employee {
     Long pesel;
     String name;
